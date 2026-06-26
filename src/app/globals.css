@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Realm accent CSS vars — overwritten at runtime by the Realm Engine. */
+  --accent: 72 177 255;       /* six eyes blue default */
+  --accent-2: 10 18 40;
+  --glow: 143 212 255;
+  --realm-transition: 900ms;
+}
+
+html { color-scheme: dark; scroll-behavior: smooth; }
+
+body {
+  background: #05060a;
+  color: #e8ecf5;
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  /* smooth realm color crossfade */
+  transition: background var(--realm-transition) ease;
+  overflow-x: hidden;
+}
+
+/* Reusable cinematic primitives */
+@layer components {
+  .realm-section {
+    @apply relative min-h-screen w-full flex flex-col items-center justify-center px-5 py-24 sm:px-8;
+  }
+  .realm-heading {
+    @apply font-display text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight;
+  }
+  .glass-panel {
+    @apply rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-md;
+  }
+  .accent-glow {
+    text-shadow: 0 0 18px rgb(var(--glow) / 0.7);
+  }
+  .card-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr));
+  }
+  .table-wrapper { @apply w-full overflow-x-auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
